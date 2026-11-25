@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <input class="theme-input" type="checkbox" id="theme-toggle" aria-label="Toggle dark mode">
   <div class="page-shell">
     <header class="nav-wrap">
       <nav class="nav container" aria-label="Main navigation">
@@ -22,6 +23,11 @@
           <a href="#work">Learning</a>
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
+          <label class="theme-toggle" for="theme-toggle">
+            <span class="theme-symbol" aria-hidden="true">◐</span>
+            <span>Theme</span>
+            <span class="theme-track" aria-hidden="true"></span>
+          </label>
         </div>
         <a class="nav-cta" href="#skills">My skills <span aria-hidden="true">↓</span></a>
       </nav>

@@ -2,9 +2,17 @@
   --ink: #1b1d1a;
   --muted: #686b65;
   --cream: #f3f1ea;
+  --page-bg: #e8e7df;
   --white: #fff;
   --lime: #d7ef78;
   --line: #dddcd4;
+  --card: #e9e8df;
+  --tag: #e7e7dd;
+  --inverse-bg: #1b1d1a;
+  --inverse-text: #fff;
+  --raised-bg: rgba(255, 255, 255, 0.94);
+  --raised-border: rgba(255, 255, 255, 0.8);
+  color-scheme: light;
 }
 
 * {
@@ -19,7 +27,36 @@ body {
   margin: 0;
   font-family: "DM Sans", sans-serif;
   color: var(--ink);
-  background: #e8e7df;
+  background: var(--page-bg);
+}
+
+.theme-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+body:has(.theme-input:checked) {
+  --page-bg: #111410;
+  background: var(--page-bg);
+}
+
+.theme-input:checked + .page-shell {
+  --ink: #f2f1e9;
+  --muted: #b0b3aa;
+  --cream: #1c201b;
+  --line: #3b4137;
+  --card: #252a23;
+  --tag: #33392d;
+  --inverse-bg: #d7ef78;
+  --inverse-text: #1b1d1a;
+  --raised-bg: rgba(35, 40, 33, 0.96);
+  --raised-border: rgba(255, 255, 255, 0.12);
+  color-scheme: dark;
 }
 
 a {
@@ -32,8 +69,10 @@ a {
   margin: 24px auto;
   overflow: hidden;
   background: var(--cream);
+  color: var(--ink);
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(35, 38, 31, 0.08);
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 .container {
@@ -68,8 +107,8 @@ a {
   height: 34px;
   display: grid;
   place-items: center;
-  color: var(--cream);
-  background: var(--ink);
+  color: var(--inverse-text);
+  background: var(--inverse-bg);
   border-radius: 50%;
   font-size: 11px;
   letter-spacing: -1px;
@@ -77,6 +116,7 @@ a {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 36px;
   font-size: 14px;
   font-weight: 600;
@@ -84,14 +124,66 @@ a {
 
 .nav-links a,
 .text-link,
+.theme-toggle,
 .footer > a {
   transition: opacity 180ms ease;
 }
 
 .nav-links a:hover,
 .text-link:hover,
+.theme-toggle:hover,
 .footer > a:hover {
   opacity: 0.55;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.theme-symbol {
+  font-size: 16px;
+}
+
+.theme-track {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  margin-left: 1px;
+  background: #b8b8b0;
+  border-radius: 999px;
+  transition: background 180ms ease;
+}
+
+.theme-track::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  background: #fff;
+  border-radius: 50%;
+  content: "";
+  transition: transform 180ms ease;
+}
+
+.theme-input:checked + .page-shell .theme-track {
+  background: #8ca23e;
+}
+
+.theme-input:checked + .page-shell .theme-track::after {
+  transform: translateX(13px);
+}
+
+.theme-input:focus-visible ~ .page-shell .theme-toggle {
+  outline: 2px solid #8ca23e;
+  outline-offset: 5px;
+  border-radius: 2px;
 }
 
 .nav-cta {
@@ -180,8 +272,8 @@ h2 em {
 }
 
 .button-primary {
-  color: var(--white);
-  background: var(--ink);
+  color: var(--inverse-text);
+  background: var(--inverse-bg);
 }
 
 .button-primary span {
@@ -192,7 +284,7 @@ h2 em {
 .text-link {
   font-size: 14px;
   font-weight: 700;
-  border-bottom: 1px solid #b8b8b0;
+  border-bottom: 1px solid var(--line);
   padding-bottom: 5px;
 }
 
@@ -243,8 +335,8 @@ h2 em {
   gap: 11px;
   min-width: 190px;
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: var(--raised-bg);
+  border: 1px solid var(--raised-border);
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(27, 29, 26, 0.12);
 }
@@ -308,7 +400,7 @@ h2 em {
 .focus-card {
   min-height: 220px;
   padding: 28px;
-  background: #e9e8df;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 8px;
 }
@@ -389,7 +481,7 @@ h2 em {
 
 .tag-list span {
   padding: 9px 13px;
-  background: #e7e7dd;
+  background: var(--tag);
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
@@ -402,16 +494,17 @@ h2 em {
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: var(--white);
-  background: var(--ink);
+  color: var(--inverse-text);
+  background: var(--inverse-bg);
   border-radius: 10px;
   margin-bottom: 48px;
   width: calc(100% - 112px);
 }
 
 .contact .eyebrow {
-  color: #aaa;
+  color: var(--inverse-text);
   margin-bottom: 18px;
+  opacity: 0.72;
 }
 
 .contact .eyebrow span {
@@ -425,7 +518,7 @@ h2 em {
 }
 
 .button-light {
-  color: var(--ink);
+  color: #1b1d1a;
   background: var(--lime);
 }
 
