@@ -100,6 +100,11 @@ a {
   font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 800;
+  transition: opacity 180ms ease;
+}
+
+.brand:hover {
+  opacity: 0.78;
 }
 
 .brand-mark {
@@ -112,6 +117,11 @@ a {
   border-radius: 50%;
   font-size: 11px;
   letter-spacing: -1px;
+  transition: transform 220ms ease, background-color 200ms ease;
+}
+
+.brand:hover .brand-mark {
+  transform: rotate(-8deg) scale(1.06);
 }
 
 .nav-links {
@@ -123,17 +133,37 @@ a {
 }
 
 .nav-links a,
-.text-link,
 .theme-toggle,
 .footer > a {
   transition: opacity 180ms ease;
 }
 
 .nav-links a:hover,
-.text-link:hover,
 .theme-toggle:hover,
 .footer > a:hover {
   opacity: 0.55;
+}
+
+.nav-links > a {
+  position: relative;
+}
+
+.nav-links > a::after {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+.nav-links > a:hover::after,
+.nav-links > a:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .theme-toggle {
@@ -192,6 +222,12 @@ a {
   font-weight: 700;
   border-bottom: 1px solid var(--ink);
   padding-bottom: 4px;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.nav-cta:hover {
+  opacity: 0.65;
+  transform: translateY(-2px);
 }
 
 .nav-cta span {
@@ -264,11 +300,24 @@ h2 em {
   border-radius: 4px;
   font-size: 14px;
   font-weight: 700;
-  transition: transform 180ms ease, background 180ms ease;
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
 }
 
 .button:hover {
   transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(27, 29, 26, 0.14);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.button:focus-visible,
+.text-link:focus-visible,
+.nav-cta:focus-visible,
+.footer > a:focus-visible {
+  outline: 2px solid #8ca23e;
+  outline-offset: 4px;
 }
 
 .button-primary {
@@ -282,10 +331,17 @@ h2 em {
 }
 
 .text-link {
+  display: inline-flex;
+  align-items: center;
   font-size: 14px;
   font-weight: 700;
   border-bottom: 1px solid var(--line);
   padding-bottom: 5px;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.text-link:hover {
+  transform: translateX(3px);
 }
 
 .text-link span {
@@ -306,6 +362,7 @@ h2 em {
   overflow: hidden;
   background: #ccd0bb;
   border-radius: 200px 200px 12px 12px;
+  box-shadow: 0 14px 36px rgba(27, 29, 26, 0.08);
 }
 
 .portrait-card img {
@@ -317,6 +374,11 @@ h2 em {
   object-position: center 28%;
   filter: grayscale(100%) contrast(0.9);
   mix-blend-mode: multiply;
+  transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.portrait-card:hover img {
+  transform: scale(1.035);
 }
 
 .portrait-glow {
@@ -403,6 +465,13 @@ h2 em {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 8px;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.focus-card:hover {
+  transform: translateY(-6px);
+  border-color: #9bb64f;
+  box-shadow: 0 14px 30px rgba(27, 29, 26, 0.09);
 }
 
 .focus-number {
@@ -462,6 +531,13 @@ h2 em {
   padding: 22px;
   border: 1px solid var(--line);
   border-radius: 8px;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.personal-card:hover {
+  transform: translateY(-4px);
+  border-color: #9bb64f;
+  box-shadow: 0 10px 24px rgba(27, 29, 26, 0.07);
 }
 
 .personal-label {
@@ -485,6 +561,12 @@ h2 em {
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.tag-list span:hover {
+  transform: translateY(-2px);
+  background: var(--line);
 }
 
 .contact {
@@ -722,5 +804,17 @@ h2 em {
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+  }
+
+  .brand:hover .brand-mark,
+  .nav-cta:hover,
+  .button:hover,
+  .button:active,
+  .text-link:hover,
+  .portrait-card:hover img,
+  .focus-card:hover,
+  .personal-card:hover,
+  .tag-list span:hover {
+    transform: none;
   }
 }
