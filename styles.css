@@ -553,6 +553,42 @@ h2 em {
   font-size: 11px;
 }
 
+.personal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 44px;
+}
+
+.personal-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.personal-label {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-list span {
+  padding: 9px 13px;
+  background: #e7e7dd;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .contact {
   min-height: 350px;
   display: flex;
@@ -708,6 +744,10 @@ h2 em {
   }
 
   .about-details {
+    grid-template-columns: 1fr;
+  }
+
+  .personal-grid {
     grid-template-columns: 1fr;
   }
 
